@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DEON MISHRA CLOCK</title>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
@@ -14,24 +15,40 @@ body{
   background:#0a0a0a;
   font-family:system-ui;
   color:#eee;
-  transition: background 0.5s;
 }
-.wrapper{text-align:center;max-width:90vw}
-.brand{
-  letter-spacing:4px;
-  font-size:16px;
-  margin-bottom:12px;
-  opacity:.8;
+
+/* MAIN GRID */
+.wrapper{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:20px;
+  align-items:center;
 }
-.clock{
-  width:260px;
-  height:260px;
+
+/* ROTATING COLOR RING */
+.ring{
+  width:240px;
+  height:240px;
   border-radius:50%;
-  border:1px solid #2a2a2a;
-  position:relative;
-  margin:auto;
-  box-shadow:0 0 30px rgba(138,43,226,.25);
+  background:conic-gradient(
+    red, blue, green, purple, yellow, red
+  );
+  animation:spin 6s linear infinite;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
+
+/* BLACK CLOCK BODY */
+.clock{
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  background:black;
+  position:relative;
+}
+
+/* MARKS */
 .mark{
   position:absolute;
   width:2px;
@@ -39,199 +56,189 @@ body{
   background:#555;
   top:6px;
   left:50%;
-  transform-origin:50% 124px;
+  transform-origin:50% 94px;
 }
 .mark.big{height:14px;background:#aaa}
+
+/* NUMBERS */
 .number{
   position:absolute;
   font-size:14px;
   font-weight:bold;
-  transform:translate(-50%,-50%);
 }
+.n12{top:8px;left:50%;transform:translateX(-50%);color:#ff5252;text-shadow:0 0 6px}
+.n3{right:8px;top:50%;transform:translateY(-50%);color:#40c4ff;text-shadow:0 0 6px}
+.n6{bottom:8px;left:50%;transform:translateX(-50%);color:#69f0ae;text-shadow:0 0 6px}
+.n9{left:8px;top:50%;transform:translateY(-50%);color:#ffd740;text-shadow:0 0 6px}
+
+/* HANDS */
 .hand{
   position:absolute;
   left:50%;
   bottom:50%;
   transform-origin:50% 100%;
-  transition: transform 0.5s linear;
 }
-.hour{width:5px;height:60px;background:#ccc;border-radius:3px}
-.minute{width:3px;height:85px;background:#eee;border-radius:3px}
-.second{width:2px;height:105px;background:#8a2be2;border-radius:2px}
+.hour{width:5px;height:45px;background:red;border-radius:4px}
+.minute{width:3px;height:65px;background:blue;border-radius:3px}
+.second{width:2px;height:80px;background:green}
+
+/* CENTER DOT */
 .center{
   width:8px;height:8px;
-  background:#8a2be2;
+  background:white;
   border-radius:50%;
   position:absolute;
   top:50%;left:50%;
   transform:translate(-50%,-50%);
 }
-.time{font-size:24px;margin-top:10px}
-.ampm{font-size:12px;opacity:.6}
-.date{font-size:14px;margin-top:4px;opacity:.7}
-.controls{
-  margin-top:12px;
+
+/* PANELS */
+.panel{
   display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-  justify-content:center;
+  flex-direction:column;
+  gap:8px;
 }
-.controls button{
-  padding:6px 10px;
+.panel input,.panel select,.panel button{
+  padding:10px;
   background:#111;
-  color:#eee;
+  color:#fff;
   border:1px solid #333;
-  border-radius:6px;
-  font-size:12px;
-  cursor:pointer;
-  transition:0.2s;
+  border-radius:8px;
+  font-size:14px;
 }
-.controls button:hover{transform:scale(1.05)}
-.alarm{margin-top:10px;display:flex;flex-direction:column;gap:6px;align-items:center}
-.alarm input[type="time"], .alarm select{
-  background:#111;
-  color:#eee;
-  border:1px solid #333;
-  padding:6px;
-  border-radius:6px;
+
+/* DATE */
+.dateBox{
+  text-align:center;
 }
-.bg{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
-.bg button{font-size:11px}
+.dateBox .time{font-size:22px}
+.dateBox .date{font-size:14px;opacity:.8}
+
+/* ANIMATION */
+@keyframes spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
 </style>
 </head>
+
 <body>
+
 <div class="wrapper">
 
-  <div class="brand">DEON MISHRA CLOCK</div>
+<!-- LEFT : ALARM -->
+<div class="panel">
+  <input type="time" id="alarmTime">
+  <select id="alarmDay">
+    <option value="all">All Days</option>
+    <option value="0">Sunday</option>
+    <option value="1">Monday</option>
+    <option value="2">Tuesday</option>
+    <option value="3">Wednesday</option>
+    <option value="4">Thursday</option>
+    <option value="5">Friday</option>
+    <option value="6">Saturday</option>
+  </select>
+  <button onclick="setAlarm()">Set Alarm</button>
+  <button onclick="stopAlarm()">Stop Alarm</button>
+</div>
 
-  <div class="clock">
-    <div class="hand hour"></div>
-    <div class="hand minute"></div>
-    <div class="hand second"></div>
-    <div class="center"></div>
+<!-- CENTER : CLOCK -->
+<div class="dateBox">
+  <div class="ring">
+    <div class="clock">
+      <div class="hand hour"></div>
+      <div class="hand minute"></div>
+      <div class="hand second"></div>
+      <div class="center"></div>
 
-    <!-- Marks -->
-    <div class="mark big" style="transform:rotate(0deg)"></div>
-    <div class="mark" style="transform:rotate(30deg)"></div>
-    <div class="mark" style="transform:rotate(60deg)"></div>
-    <div class="mark" style="transform:rotate(90deg)"></div>
-    <div class="mark" style="transform:rotate(120deg)"></div>
-    <div class="mark" style="transform:rotate(150deg)"></div>
-    <div class="mark" style="transform:rotate(180deg)"></div>
-    <div class="mark" style="transform:rotate(210deg)"></div>
-    <div class="mark" style="transform:rotate(240deg)"></div>
-    <div class="mark" style="transform:rotate(270deg)"></div>
-    <div class="mark" style="transform:rotate(300deg)"></div>
-    <div class="mark" style="transform:rotate(330deg)"></div>
+      <div class="mark big" style="transform:rotate(0deg)"></div>
+      <div class="mark" style="transform:rotate(30deg)"></div>
+      <div class="mark" style="transform:rotate(60deg)"></div>
+      <div class="mark big" style="transform:rotate(90deg)"></div>
+      <div class="mark" style="transform:rotate(120deg)"></div>
+      <div class="mark" style="transform:rotate(150deg)"></div>
+      <div class="mark big" style="transform:rotate(180deg)"></div>
+      <div class="mark" style="transform:rotate(210deg)"></div>
+      <div class="mark" style="transform:rotate(240deg)"></div>
+      <div class="mark big" style="transform:rotate(270deg)"></div>
+      <div class="mark" style="transform:rotate(300deg)"></div>
+      <div class="mark" style="transform:rotate(330deg)"></div>
 
-    <!-- Numbers -->
-    <div class="number" style="top:20px;left:50%">12</div>
-    <div class="number" style="top:50px;right:10px">1</div>
-    <div class="number" style="top:90px;right:20px">2</div>
-    <div class="number" style="bottom:50px;right:10px">3</div>
-    <div class="number" style="bottom:20px;left:50%">6</div>
-    <div class="number" style="bottom:50px;left:10px">9</div>
-    <div class="number" style="top:90px;left:20px">10</div>
-    <div class="number" style="top:50px;left:10px">11</div>
-  </div>
-
-  <div class="time">00 : 00</div>
-  <div class="ampm">AM</div>
-  <div class="date">Monday, 01 Jan 2025</div>
-
-  <div class="controls">
-    <button onclick="addHour()">Hour +</button>
-    <button onclick="addMin()">Min +</button>
-    <button onclick="toggleAMPM()">AM / PM</button>
-  </div>
-
-  <div class="alarm">
-    <input type="time" id="alarmTime">
-    <select id="alarmDay">
-      <option value="all">All Days</option>
-      <option value="0">Sunday</option>
-      <option value="1">Monday</option>
-      <option value="2">Tuesday</option>
-      <option value="3">Wednesday</option>
-      <option value="4">Thursday</option>
-      <option value="5">Friday</option>
-      <option value="6">Saturday</option>
-    </select>
-    <div style="display:flex;gap:6px;">
-      <button onclick="setAlarm()">Set Alarm</button>
-      <button onclick="stopAlarm()">Stop Alarm</button>
+      <div class="number n12">12</div>
+      <div class="number n3">3</div>
+      <div class="number n6">6</div>
+      <div class="number n9">9</div>
     </div>
   </div>
 
-  <div class="bg">
-    <button onclick="bg('#0a0a0a')">Dark</button>
-    <button onclick="bg('linear-gradient(45deg,#8a2be2,#000)')">Purple</button>
-    <button onclick="bg('linear-gradient(45deg,#ff512f,#000)')">Red</button>
-    <button onclick="bg('linear-gradient(45deg,#28a745,#000)')">Green</button>
-    <button onclick="bg('linear-gradient(45deg,#6c757d,#000)')">Gray</button>
-    <button onclick="bg('linear-gradient(45deg,#ffc107,#000)')">Yellow</button>
-    <button onclick="bg('linear-gradient(45deg,#007bff,#000)')">Blue</button>
-  </div>
+  <div class="time" id="timeText">00:00</div>
+  <div class="date" id="dateText">Monday</div>
+</div>
+
+<!-- RIGHT : TIME SET -->
+<div class="panel">
+  <input type="time" id="setTime">
+  <button onclick="applyTime()">Apply Time</button>
+  <button onclick="resetReal()">Real Time</button>
+</div>
 
 </div>
 
 <audio id="alarmSound" src="alarm.mp3"></audio>
 
 <script>
-let customTime = null;
-let alarms = []; // multiple alarms
+let baseTime=null;
+let alarms=[];
 
 function updateClock(){
-  const now = customTime || new Date();
-  let h = now.getHours();
-  let m = now.getMinutes();
-  let s = now.getSeconds();
+  const now=baseTime?new Date(baseTime):new Date();
+  const h=now.getHours(),m=now.getMinutes(),s=now.getSeconds();
 
-  // AM/PM
-  let ampm = h >= 12 ? "PM" : "AM";
-  h = h % 12 || 12;
+  document.getElementById("timeText").innerHTML=
+    String(h).padStart(2,"0")+":"+String(m).padStart(2,"0");
 
-  // Update digital clock
-  document.querySelector(".time").innerHTML = 
-    String(h).padStart(2,"0")+" : "+String(m).padStart(2,"0");
-  document.querySelector(".ampm").innerHTML = ampm;
+  const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  document.getElementById("dateText").innerHTML=days[now.getDay()];
 
-  // Update date
-  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  document.querySelector(".date").innerHTML = days[now.getDay()]+", "+
-    String(now.getDate()).padStart(2,"0")+" "+
-    now.toLocaleString('default',{month:'short'})+" "+
-    now.getFullYear();
+  document.querySelector(".hour").style.transform=
+    `translateX(-50%) rotate(${(h%12)*30+m/2}deg)`;
+  document.querySelector(".minute").style.transform=
+    `translateX(-50%) rotate(${m*6}deg)`;
+  document.querySelector(".second").style.transform=
+    `translateX(-50%) rotate(${s*6}deg)`;
 
-  // Hands
-  document.querySelector(".hour").style.transform = `translateX(-50%) rotate(${h*30 + m/2}deg)`;
-  document.querySelector(".minute").style.transform = `translateX(-50%) rotate(${m*6}deg)`;
-  document.querySelector(".second").style.transform = `translateX(-50%) rotate(${s*6}deg)`;
-
-  // Check alarms
   alarms.forEach(a=>{
-    if((a.day==='all'||a.day==now.getDay()) && a.time===String(now.getHours()).padStart(2,'0')+':'+String(m).padStart(2,'0')){
+    if((a.day==='all'||a.day==now.getDay()) &&
+      a.time===String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")){
       document.getElementById("alarmSound").play();
     }
   });
 
-  if(customTime) customTime.setSeconds(customTime.getSeconds()+1);
+  if(baseTime) baseTime.setSeconds(baseTime.getSeconds()+1);
 }
 
-// Control buttons
-function addHour(){if(!customTime) customTime=new Date(); customTime.setHours(customTime.getHours()+1)}
-function addMin(){if(!customTime) customTime=new Date(); customTime.setMinutes(customTime.getMinutes()+1)}
-function toggleAMPM(){if(!customTime) customTime=new Date(); customTime.setHours((customTime.getHours()+12)%24)}
-function setAlarm(){
-  const time = document.getElementById("alarmTime").value;
-  const day = document.getElementById("alarmDay").value;
-  if(time){alarms.push({time,day}); alert('Alarm set!');}
+function applyTime(){
+  const t=document.getElementById("setTime").value;
+  if(!t)return;
+  const n=new Date();const[x,y]=t.split(":");
+  baseTime=new Date(n.getFullYear(),n.getMonth(),n.getDate(),x,y,0);
 }
-function stopAlarm(){document.getElementById("alarmSound").pause(); document.getElementById("alarmSound").currentTime=0;}
-function bg(v){document.body.style.background=v}
+function resetReal(){baseTime=null;}
+function setAlarm(){
+  alarms.push({
+    time:document.getElementById("alarmTime").value,
+    day:document.getElementById("alarmDay").value
+  });
+}
+function stopAlarm(){
+  const a=document.getElementById("alarmSound");
+  a.pause();a.currentTime=0;
+}
 
 setInterval(updateClock,1000);
 updateClock();
 </script>
+
 </body>
 </html>
