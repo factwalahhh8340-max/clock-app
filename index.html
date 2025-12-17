@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEON MISHRA CLOCK</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#0a0a0a;
+  font-family:system-ui;
+  color:#eee;
+}
+
+.wrapper{text-align:center;width:320px}
+
+.brand{
+  letter-spacing:4px;
+  font-size:16px;
+  margin-bottom:12px;
+  opacity:.8;
+}
+
+.clock{
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  border:1px solid #2a2a2a;
+  position:relative;
+  margin:auto;
+  box-shadow:0 0 30px rgba(138,43,226,.25);
+}
+
+.mark{
+  position:absolute;
+  width:2px;
+  height:8px;
+  background:#555;
+  top:6px;
+  left:50%;
+  transform-origin:50% 124px;
+}
+.mark.big{height:14px;background:#aaa}
+
+.hand{
+  position:absolute;
+  left:50%;
+  bottom:50%;
+  transform-origin:50% 100%;
+}
+.hour{width:5px;height:60px;background:#ccc}
+.minute{width:3px;height:85px;background:#eee}
+.second{width:2px;height:105px;background:#8a2be2}
+
+.center{
+  width:8px;height:8px;
+  background:#8a2be2;
+  border-radius:50%;
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+}
+
+.time{font-size:24px;margin-top:10px}
+.ampm{font-size:12px;opacity:.6}
+
+.controls{
+  margin-top:12px;
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.controls button{
+  padding:6px 10px;
+  background:#111;
+  color:#eee;
+  border:1px solid #333;
+  border-radius:6px;
+  font-size:12px;
+}
+
+.alarm{margin-top:10px}
+.alarm input{
+  background:#111;
+  color:#eee;
+  border:1px solid #333;
+  padding:6px;
+  border-radius:6px;
+}
+
+.bg{margin-top:10px}
+.bg button{font-size:11px}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <div class="brand">DEON MISHRA CLOCK</div>
+
+  <div class="clock">
+    <div class="hand hour"></div>
+    <div class="hand minute"></div>
+    <div class="hand second"></div>
+    <div class="center"></div>
+
+    <div class="mark big" style="transform:rotate(0deg)"></div>
+    <div class="mark" style="transform:rotate(30deg)"></div>
+    <div class="mark" style="transform:rotate(60deg)"></div>
+    <div class="mark" style="transform:rotate(90deg)"></div>
+    <div class="mark" style="transform:rotate(120deg)"></div>
+    <div class="mark" style="transform:rotate(150deg)"></div>
+    <div class="mark" style="transform:rotate(180deg)"></div>
+    <div class="mark" style="transform:rotate(210deg)"></div>
+    <div class="mark" style="transform:rotate(240deg)"></div>
+    <div class="mark" style="transform:rotate(270deg)"></div>
+    <div class="mark" style="transform:rotate(300deg)"></div>
+    <div class="mark" style="transform:rotate(330deg)"></div>
+  </div>
+
+  <div class="time">00 : 00</div>
+  <div class="ampm">AM</div>
+
+  <div class="controls">
+    <button onclick="addHour()">Hour +</button>
+    <button onclick="addMin()">Min +</button>
+    <button onclick="toggleAMPM()">AM / PM</button>
+  </div>
+
+  <div class="alarm">
+    <input type="time" id="alarmTime">
+    <button onclick="setAlarm()">Set Alarm</button>
+  </div>
+
+  <div class="bg">
+    <button onclick="bg('#0a0a0a')">Dark</button>
+    <button onclick="bg('linear-gradient(45deg,#8a2be2,#000)')">Purple</button>
+    <button onclick="bg('linear-gradient(45deg,#ff512f,#000)')">Red</button>
+  </div>
+
+</div>
+
+<audio id="alarmSound" src="alarm.mp3"></audio>
+
+<script>
+let customTime = null;
+let alarm = null;
+
+function updateClock(){
+  const now = customTime || new Date();
+
+  let h = now.getHours();
+  let m = now.getMinutes();
+  let s = now.getSeconds();
+
+  let ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+
+  document.querySelector(".time").innerHTML =
+    String(h).padStart(2,"0")+" : "+String(m).padStart(2,"0");
+  document.querySelector(".ampm").innerHTML = ampm;
+
+  document.querySelector(".hour").style.transform =
+    `translateX(-50%) rotate(${h*30 + m/2}deg)`;
+  document.querySelector(".minute").style.transform =
+    `translateX(-50%) rotate(${m*6}deg)`;
+  document.querySelector(".second").style.transform =
+    `translateX(-50%) rotate(${s*6}deg)`;
+
+  const cur = String(now.getHours()).padStart(2,"0")+":"+String(m).padStart(2,"0");
+  if(alarm && cur === alarm){
+    document.getElementById("alarmSound").play();
+  }
+
+  if(customTime) customTime.setSeconds(customTime.getSeconds()+1);
+}
+
+function addHour(){if(!customTime) customTime=new Date(); customTime.setHours(customTime.getHours()+1)}
+function addMin(){if(!customTime) customTime=new Date(); customTime.setMinutes(customTime.getMinutes()+1)}
+function toggleAMPM(){if(!customTime) customTime=new Date(); customTime.setHours(customTime.getHours()+12)}
+function setAlarm(){alarm=document.getElementById("alarmTime").value}
+function bg(v){document.body.style.background=v}
+
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+</body>
+</html>
