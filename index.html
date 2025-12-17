@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>MAD3 BY AVI </3</title>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
@@ -14,228 +12,86 @@ body{
   align-items:center;
   background:#000;
   font-family:system-ui;
-  color:#eee;
-}
-
-/* PHONE */
-.phone{
-  width:360px;
-  height:720px;
-  border-radius:40px;
-  background:linear-gradient(180deg,#0a0a0a,#000);
-  box-shadow:0 30px 90px rgba(0,0,0,.9);
-  padding:16px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-/* HEADER */
-.header{
-  text-align:center;
-  font-weight:700;
-  color:#ff4d6d;
-  letter-spacing:1px;
-  text-shadow:0 0 12px #ff4d6d;
-}
-
-/* CLOCK */
-.clockWrap{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-}
-
-/* GALAXY RINGS */
-.ring{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(4px);
-}
-.r1{
-  width:240px;height:240px;
-  background:conic-gradient(#ff004c,#00e5ff,#7cff00,#ffcc00,#b388ff,#ff004c);
-  animation:spin1 14s linear infinite;
-}
-.r2{
-  width:260px;height:260px;
-  background:conic-gradient(#00e5ff,#ffcc00,#ff004c,#7cff00,#00e5ff);
-  animation:spin2 20s linear infinite reverse;
-}
-.r3{
-  width:280px;height:280px;
-  background:conic-gradient(#7cff00,#b388ff,#ffcc00,#00e5ff,#7cff00);
-  animation:spin3 26s linear infinite;
-}
-
-/* CLOCK BODY */
-.clock{
-  width:200px;height:200px;
-  background:#000;
-  border-radius:50%;
-  position:relative;
-  z-index:2;
-}
-
-/* NUMBERS */
-.num{
-  position:absolute;
-  font-weight:700;
-}
-.n12{top:8px;left:50%;transform:translateX(-50%);color:red;text-shadow:0 0 8px red}
-.n3{right:8px;top:50%;transform:translateY(-50%);color:#00e5ff;text-shadow:0 0 8px}
-.n6{bottom:8px;left:50%;transform:translateX(-50%);color:#7cff00;text-shadow:0 0 8px}
-.n9{left:8px;top:50%;transform:translateY(-50%);color:#ffcc00;text-shadow:0 0 8px}
-
-/* HANDS */
-.hand{
-  position:absolute;
-  left:50%;
-  bottom:50%;
-  transform-origin:50% 100%;
-}
-.hour{width:5px;height:45px;background:red}
-.minute{width:3px;height:65px;background:#00e5ff}
-.second{width:2px;height:80px;background:#7cff00}
-
-.center{
-  width:10px;height:10px;
-  background:#fff;
-  border-radius:50%;
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-}
-
-/* INFO */
-.info{text-align:center}
-.time{font-size:28px;font-weight:700}
-.day{opacity:.7}
-
-/* CONTROLS */
-.controls{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:8px;
-}
-.box{
-  background:#111;
-  border-radius:14px;
-  padding:8px;
-}
-.box label{font-size:11px;opacity:.6}
-.box input,.box select,.box button{
-  width:100%;
-  margin-top:4px;
-  background:#000;
   color:#fff;
-  border:1px solid #333;
-  border-radius:10px;
-  padding:8px;
-}
+}/* FIXED PHONE SIZE */ .phone{ width:360px; height:720px; background:#050505; border-radius:40px; box-shadow:0 0 60px rgba(0,0,0,.9); padding:16px; display:flex; flex-direction:column; gap:14px; }
 
-/* ANIMATIONS */
-@keyframes spin1{to{transform:rotate(360deg)}}
-@keyframes spin2{to{transform:rotate(-360deg)}}
-@keyframes spin3{to{transform:rotate(360deg)}}
-</style>
+.header{ text-align:center; font-weight:700; letter-spacing:1px; color:#ff4d6d; text-shadow:0 0 12px #ff4d6d; }
+
+/* CLOCK AREA */ .clockArea{ flex:1; display:flex; justify-content:center; align-items:center; position:relative; }
+
+/* NEON RINGS */ .ring{ position:absolute; border-radius:50%; filter:blur(3px); } .ring1{ width:240px;height:240px; background:conic-gradient( from 0deg, rgba(255,0,76,0) 0deg, rgba(255,0,76,.2) 40deg, rgba(255,0,76,.8) 90deg, rgba(255,0,76,.2) 140deg, rgba(255,0,76,0) 180deg, transparent 360deg ); animation:spin 8s linear infinite; } .ring2{ width:265px;height:265px; background:conic-gradient( from 120deg, rgba(0,229,255,0) 0deg, rgba(0,229,255,.25) 50deg, rgba(0,229,255,.9) 100deg, rgba(0,229,255,.25) 150deg, rgba(0,229,255,0) 200deg, transparent 360deg ); animation:spin 14s linear infinite reverse; } .ring3{ width:290px;height:290px; background:conic-gradient( from 240deg, rgba(124,255,0,0) 0deg, rgba(124,255,0,.25) 60deg, rgba(124,255,0,.85) 120deg, rgba(124,255,0,.25) 180deg, rgba(124,255,0,0) 240deg, transparent 360deg ); animation:spin 22s linear infinite; }
+
+/* CLOCK BODY */ .clock{ width:200px;height:200px; background:#000; border-radius:50%; position:relative; z-index:5; }
+
+.num{ position:absolute; font-weight:700; } .n12{top:8px;left:50%;transform:translateX(-50%);color:red} .n3{right:8px;top:50%;transform:translateY(-50%);color:#00e5ff} .n6{bottom:8px;left:50%;transform:translateX(-50%);color:#7cff00} .n9{left:8px;top:50%;transform:translateY(-50%);color:#ffcc00}
+
+.hand{ position:absolute; left:50%;bottom:50%; transform-origin:50% 100%; } .hour{width:5px;height:45px;background:red} .minute{width:3px;height:65px;background:#00e5ff} .second{width:2px;height:80px;background:#7cff00} .center{ width:10px;height:10px;background:#fff; border-radius:50%; position:absolute;top:50%;left:50%; transform:translate(-50%,-50%); }
+
+.info{text-align:center} .time{font-size:28px;font-weight:700} .date{opacity:.7;font-size:14px}
+
+/* CONTROLS */ .controls{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; } .box{ background:#111; border-radius:16px; padding:10px; } .box label{font-size:12px;opacity:.6} .box input,.box select,.box button{ width:100%; margin-top:6px; padding:10px; background:#000; border:1px solid #333; border-radius:12px; color:#fff; font-size:14px; }
+
+@keyframes spin{to{transform:rotate(360deg)}} </style>
+
 </head>
+<body><div class="phone">
+  <div class="header">MAD3 BY AVI </3</div>  <div class="clockArea">
+    <div class="ring ring3"></div>
+    <div class="ring ring2"></div>
+    <div class="ring ring1"></div><div class="clock">
+  <div class="hand hour"></div>
+  <div class="hand minute"></div>
+  <div class="hand second"></div>
+  <div class="center"></div>
+  <div class="num n12">12</div>
+  <div class="num n3">3</div>
+  <div class="num n6">6</div>
+  <div class="num n9">9</div>
+</div>
 
-<body>
-
-<div class="phone">
-  <div class="header">MAD3 BY AVI </3</div>
-
-  <div class="clockWrap">
-    <div class="ring r3"></div>
-    <div class="ring r2"></div>
-    <div class="ring r1"></div>
-
-    <div class="clock">
-      <div class="hand hour"></div>
-      <div class="hand minute"></div>
-      <div class="hand second"></div>
-      <div class="center"></div>
-
-      <div class="num n12">12</div>
-      <div class="num n3">3</div>
-      <div class="num n6">6</div>
-      <div class="num n9">9</div>
-    </div>
-  </div>
-
-  <div class="info">
+  </div>  <div class="info">
     <div class="time" id="timeText">00:00</div>
-    <div class="day" id="dayText">Monday</div>
-  </div>
-
-  <div class="controls">
-    <!-- ALARM -->
+    <div class="date" id="dateText">01 Jan 2025 • Monday</div>
+  </div>  <div class="controls">
     <div class="box">
       <label>Alarm</label>
       <input type="time" id="alarmTime">
       <button onclick="setAlarm()">Set</button>
-    </div>
-
-    <!-- DAY -->
-    <div class="box">
-      <label>Day</label>
-      <select id="daySet">
-        <option>Sunday</option><option>Monday</option><option>Tuesday</option>
-        <option>Wednesday</option><option>Thursday</option>
-        <option>Friday</option><option>Saturday</option>
-      </select>
-      <button onclick="setDay()">Apply</button>
-    </div>
-
-    <!-- TIME -->
-    <div class="box">
-      <label>Time</label>
-      <input type="time" id="setTime">
-      <button onclick="applyTime()">Apply</button>
-    </div>
-  </div>
+    </div><div class="box">
+  <label>Date</label>
+  <input type="date" id="dateSet">
+  <button onclick="setDate()">Apply</button>
 </div>
 
-<audio id="alarmSound" src="alarm.mp3"></audio>
+<div class="box">
+  <label>Time</label>
+  <input type="time" id="timeSet">
+  <button onclick="setTime()">Apply</button>
+</div>
+
+  </div>
+</div><audio id="alarmSound" src="alarm.mp3"></audio>
 
 <script>
-let baseTime=null, alarm=null, manualDay=null;
+let base=null,alarm=null;
 
-function update(){
-  const now=baseTime?new Date(baseTime):new Date();
+function tick(){
+  const now=base?new Date(base):new Date();
   const h=now.getHours(),m=now.getMinutes(),s=now.getSeconds();
+  timeText.innerText=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0");
+  dateText.innerText=now.toDateString();
 
-  timeText.innerText=
-    String(h).padStart(2,"0")+":"+String(m).padStart(2,"0");
-
-  const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  dayText.innerText = manualDay ?? days[now.getDay()];
-
-  document.querySelector(".hour").style.transform=
-    `translateX(-50%) rotate(${(h%12)*30+m/2}deg)`;
-  document.querySelector(".minute").style.transform=
-    `translateX(-50%) rotate(${m*6}deg)`;
-  document.querySelector(".second").style.transform=
-    `translateX(-50%) rotate(${s*6}deg)`;
+  document.querySelector('.hour').style.transform=`translateX(-50%) rotate(${(h%12)*30+m/2}deg)`;
+  document.querySelector('.minute').style.transform=`translateX(-50%) rotate(${m*6}deg)`;
+  document.querySelector('.second').style.transform=`translateX(-50%) rotate(${s*6}deg)`;
 
   if(alarm===timeText.innerText) alarmSound.play();
-  if(baseTime) baseTime.setSeconds(baseTime.getSeconds()+1);
+  if(base) base.setSeconds(base.getSeconds()+1);
 }
-
-function applyTime(){
-  const [h,m]=setTime.value.split(":");
-  const n=new Date();
-  baseTime=new Date(n.getFullYear(),n.getMonth(),n.getDate(),h,m,0);
-}
+function setTime(){const [h,m]=timeSet.value.split(':');const d=new Date();base=new Date(d.getFullYear(),d.getMonth(),d.getDate(),h,m,0)}
+function setDate(){const d=new Date(dateSet.value);if(base){base.setFullYear(d.getFullYear(),d.getMonth(),d.getDate())}}
 function setAlarm(){alarm=alarmTime.value}
-function setDay(){manualDay=daySet.value}
 
-setInterval(update,1000);
-update();
-</script>
-
-</body>
+setInterval(tick,1000);tick();
+</script></body>
 </html>
