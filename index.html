@@ -1,100 +1,241 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MAD3 BY AVI </3</title>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-  min-height:100vh;
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:radial-gradient(circle at top,#111,#000);
+  background:#000;
   font-family:system-ui;
   color:#eee;
-}/* PHONE FRAME */ .phone{ width:360px; height:720px; border-radius:40px; background:linear-gradient(180deg,#0c0c0c,#050505); box-shadow:0 30px 80px rgba(0,0,0,.9), inset 0 0 30px rgba(255,255,255,.05); padding:18px; display:flex; flex-direction:column; gap:14px; }
+}
 
-/* HEADER */ .header{ text-align:center; font-weight:700; letter-spacing:1px; color:#ff4d6d; text-shadow:0 0 12px rgba(255,77,109,.6); }
+/* PHONE */
+.phone{
+  width:360px;
+  height:720px;
+  border-radius:40px;
+  background:linear-gradient(180deg,#0a0a0a,#000);
+  box-shadow:0 30px 90px rgba(0,0,0,.9);
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
 
-/* CLOCK AREA */ .clockWrap{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+/* HEADER */
+.header{
+  text-align:center;
+  font-weight:700;
+  color:#ff4d6d;
+  letter-spacing:1px;
+  text-shadow:0 0 12px #ff4d6d;
+}
 
-.ring{ width:220px; height:220px; border-radius:50%; position:relative; box-shadow:0 0 30px rgba(255,0,80,.4); }
+/* CLOCK */
+.clockWrap{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
 
-.ring::before{ content:""; position:absolute; inset:-4px; border-radius:50%; background:conic-gradient(#ff004c,#00e5ff,#7cff00,#ffcc00,#ff004c); filter:blur(6px); }
+/* GALAXY RINGS */
+.ring{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(4px);
+}
+.r1{
+  width:240px;height:240px;
+  background:conic-gradient(#ff004c,#00e5ff,#7cff00,#ffcc00,#b388ff,#ff004c);
+  animation:spin1 14s linear infinite;
+}
+.r2{
+  width:260px;height:260px;
+  background:conic-gradient(#00e5ff,#ffcc00,#ff004c,#7cff00,#00e5ff);
+  animation:spin2 20s linear infinite reverse;
+}
+.r3{
+  width:280px;height:280px;
+  background:conic-gradient(#7cff00,#b388ff,#ffcc00,#00e5ff,#7cff00);
+  animation:spin3 26s linear infinite;
+}
 
-.clock{ width:100%; height:100%; border-radius:50%; background:#000; position:relative; }
+/* CLOCK BODY */
+.clock{
+  width:200px;height:200px;
+  background:#000;
+  border-radius:50%;
+  position:relative;
+  z-index:2;
+}
 
-.hand{ position:absolute; left:50%; bottom:50%; transform-origin:50% 100%; } .hour{width:5px;height:48px;background:#ff4d4d;border-radius:4px} .minute{width:3px;height:68px;background:#4dd2ff;border-radius:3px} .second{width:2px;height:82px;background:#7cff00}
+/* NUMBERS */
+.num{
+  position:absolute;
+  font-weight:700;
+}
+.n12{top:8px;left:50%;transform:translateX(-50%);color:red;text-shadow:0 0 8px red}
+.n3{right:8px;top:50%;transform:translateY(-50%);color:#00e5ff;text-shadow:0 0 8px}
+.n6{bottom:8px;left:50%;transform:translateX(-50%);color:#7cff00;text-shadow:0 0 8px}
+.n9{left:8px;top:50%;transform:translateY(-50%);color:#ffcc00;text-shadow:0 0 8px}
 
-.center{ width:10px;height:10px; background:#fff;border-radius:50%; position:absolute;top:50%;left:50%;transform:translate(-50%,-50%); }
+/* HANDS */
+.hand{
+  position:absolute;
+  left:50%;
+  bottom:50%;
+  transform-origin:50% 100%;
+}
+.hour{width:5px;height:45px;background:red}
+.minute{width:3px;height:65px;background:#00e5ff}
+.second{width:2px;height:80px;background:#7cff00}
 
-.timeText{ margin-top:14px; font-size:30px; font-weight:700; }
+.center{
+  width:10px;height:10px;
+  background:#fff;
+  border-radius:50%;
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+}
 
-.dateText{ opacity:.7; }
+/* INFO */
+.info{text-align:center}
+.time{font-size:28px;font-weight:700}
+.day{opacity:.7}
 
-/* CONTROLS */ .controls{ display:grid; grid-template-columns:1fr 1fr; gap:10px; } .controls button,.controls input,.controls select{ background:#111; color:#fff; border:1px solid #333; border-radius:12px; padding:10px; }
+/* CONTROLS */
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+}
+.box{
+  background:#111;
+  border-radius:14px;
+  padding:8px;
+}
+.box label{font-size:11px;opacity:.6}
+.box input,.box select,.box button{
+  width:100%;
+  margin-top:4px;
+  background:#000;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:10px;
+  padding:8px;
+}
 
-.section{ font-size:12px; opacity:.6; text-align:center; } </style>
-
+/* ANIMATIONS */
+@keyframes spin1{to{transform:rotate(360deg)}}
+@keyframes spin2{to{transform:rotate(-360deg)}}
+@keyframes spin3{to{transform:rotate(360deg)}}
+</style>
 </head>
-<body><div class="phone">
-  <div class="header">MAD3 BY AVI </3</div>  <div class="clockWrap">
-    <div class="ring">
-      <div class="clock">
-        <div class="hand hour"></div>
-        <div class="hand minute"></div>
-        <div class="hand second"></div>
-        <div class="center"></div>
-      </div>
+
+<body>
+
+<div class="phone">
+  <div class="header">MAD3 BY AVI </3</div>
+
+  <div class="clockWrap">
+    <div class="ring r3"></div>
+    <div class="ring r2"></div>
+    <div class="ring r1"></div>
+
+    <div class="clock">
+      <div class="hand hour"></div>
+      <div class="hand minute"></div>
+      <div class="hand second"></div>
+      <div class="center"></div>
+
+      <div class="num n12">12</div>
+      <div class="num n3">3</div>
+      <div class="num n6">6</div>
+      <div class="num n9">9</div>
     </div>
-    <div class="timeText" id="timeText">00:00</div>
-    <div class="dateText" id="dateText">Monday</div>
-  </div>  <div class="section">ALARM</div>
-  <div class="controls">
-    <input type="time" id="alarmTime">
-    <select id="alarmDay">
-      <option value="all">All Days</option>
-      <option value="0">Sunday</option>
-      <option value="1">Monday</option>
-      <option value="2">Tuesday</option>
-      <option value="3">Wednesday</option>
-      <option value="4">Thursday</option>
-      <option value="5">Friday</option>
-      <option value="6">Saturday</option>
-    </select>
-    <button onclick="setAlarm()">Set</button>
-    <button onclick="stopAlarm()">Stop</button>
-  </div>  <div class="section">TIME CONTROL</div>
-  <div class="controls">
-    <input type="time" id="setTime">
-    <button onclick="applyTime()">Apply</button>
-    <button onclick="resetReal()">Real Time</button>
   </div>
-</div><audio id="alarmSound" src="alarm.mp3"></audio>
+
+  <div class="info">
+    <div class="time" id="timeText">00:00</div>
+    <div class="day" id="dayText">Monday</div>
+  </div>
+
+  <div class="controls">
+    <!-- ALARM -->
+    <div class="box">
+      <label>Alarm</label>
+      <input type="time" id="alarmTime">
+      <button onclick="setAlarm()">Set</button>
+    </div>
+
+    <!-- DAY -->
+    <div class="box">
+      <label>Day</label>
+      <select id="daySet">
+        <option>Sunday</option><option>Monday</option><option>Tuesday</option>
+        <option>Wednesday</option><option>Thursday</option>
+        <option>Friday</option><option>Saturday</option>
+      </select>
+      <button onclick="setDay()">Apply</button>
+    </div>
+
+    <!-- TIME -->
+    <div class="box">
+      <label>Time</label>
+      <input type="time" id="setTime">
+      <button onclick="applyTime()">Apply</button>
+    </div>
+  </div>
+</div>
+
+<audio id="alarmSound" src="alarm.mp3"></audio>
 
 <script>
-let baseTime=null;let alarms=[];
-function updateClock(){
- const now=baseTime?new Date(baseTime):new Date();
- const h=now.getHours(),m=now.getMinutes(),s=now.getSeconds();
- document.getElementById('timeText').innerText=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
- const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
- document.getElementById('dateText').innerText=days[now.getDay()];
- document.querySelector('.hour').style.transform=`translateX(-50%) rotate(${(h%12)*30+m/2}deg)`;
- document.querySelector('.minute').style.transform=`translateX(-50%) rotate(${m*6}deg)`;
- document.querySelector('.second').style.transform=`translateX(-50%) rotate(${s*6}deg)`;
- alarms.forEach(a=>{
-  if((a.day==='all'||a.day==now.getDay())&&a.time===String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')){
-    document.getElementById('alarmSound').play();
-  }
- });
- if(baseTime) baseTime.setSeconds(baseTime.getSeconds()+1);
+let baseTime=null, alarm=null, manualDay=null;
+
+function update(){
+  const now=baseTime?new Date(baseTime):new Date();
+  const h=now.getHours(),m=now.getMinutes(),s=now.getSeconds();
+
+  timeText.innerText=
+    String(h).padStart(2,"0")+":"+String(m).padStart(2,"0");
+
+  const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  dayText.innerText = manualDay ?? days[now.getDay()];
+
+  document.querySelector(".hour").style.transform=
+    `translateX(-50%) rotate(${(h%12)*30+m/2}deg)`;
+  document.querySelector(".minute").style.transform=
+    `translateX(-50%) rotate(${m*6}deg)`;
+  document.querySelector(".second").style.transform=
+    `translateX(-50%) rotate(${s*6}deg)`;
+
+  if(alarm===timeText.innerText) alarmSound.play();
+  if(baseTime) baseTime.setSeconds(baseTime.getSeconds()+1);
 }
-function applyTime(){const t=setTime.value;if(!t)return;const n=new Date();const[x,y]=t.split(':');baseTime=new Date(n.getFullYear(),n.getMonth(),n.getDate(),x,y,0)}
-function resetReal(){baseTime=null}
-function setAlarm(){alarms.push({time:alarmTime.value,day:alarmDay.value})}
-function stopAlarm(){const a=alarmSound;a.pause();a.currentTime=0}
-setInterval(updateClock,1000);updateClock();
-</script></body>
+
+function applyTime(){
+  const [h,m]=setTime.value.split(":");
+  const n=new Date();
+  baseTime=new Date(n.getFullYear(),n.getMonth(),n.getDate(),h,m,0);
+}
+function setAlarm(){alarm=alarmTime.value}
+function setDay(){manualDay=daySet.value}
+
+setInterval(update,1000);
+update();
+</script>
+
+</body>
 </html>
