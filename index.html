@@ -3,180 +3,190 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luxury Clock by Abhi</title>
+<title>DEON MISHRA CLOCK</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui;}
-body{display:flex;justify-content:center;align-items:flex-start;background:#0a0a0a;height:100vh;color:#fff;}
-.container{width:360px;padding:10px;display:flex;flex-direction:column;align-items:center;}
+*{margin:0;padding:0;box-sizing:border-box}
 
-/* HEADER */
-.header{
-  font-size:18px;font-weight:bold;margin-bottom:20px;color:#ff6f61;
-  text-shadow:0 0 6px #ff6f61,0 0 12px #ff6f61;
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#0a0a0a;
+  font-family:system-ui;
+  color:#eee;
 }
 
-/* CLOCK RING */
-.clock-ring{
-  position:relative;width:250px;height:250px;border-radius:50%;
-  display:flex;justify-content:center;align-items:center;
+.wrapper{text-align:center;width:320px}
+
+.brand{
+  letter-spacing:4px;
+  font-size:16px;
+  margin-bottom:12px;
+  opacity:.8;
 }
-.ring1,.ring2,.ring3{
-  position:absolute;width:250px;height:250px;border-radius:50%;
-  border:2px solid transparent;box-shadow:0 0 15px red,0 0 25px yellow,0 0 35px green;
-  animation:spin 8s linear infinite;
+
+.clock{
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  border:1px solid #2a2a2a;
+  position:relative;
+  margin:auto;
+  box-shadow:0 0 30px rgba(138,43,226,.25);
 }
-.ring2{width:230px;height:230px;box-shadow:0 0 10px blue,0 0 20px red,0 0 30px yellow;animation:spin 12s linear infinite reverse;}
-.ring3{width:210px;height:210px;box-shadow:0 0 8px green,0 0 15px blue,0 0 22px red;animation:spin 10s linear infinite;}
 
-@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.mark{
+  position:absolute;
+  width:2px;
+  height:8px;
+  background:#555;
+  top:6px;
+  left:50%;
+  transform-origin:50% 124px;
+}
+.mark.big{height:14px;background:#aaa}
 
-/* CLOCK BODY */
-.clock-body{position:absolute;width:180px;height:180px;border-radius:50%;background:black;display:flex;justify-content:center;align-items:center;}
-.mark{position:absolute;width:2px;height:8px;background:#555;top:6px;left:50%;transform-origin:50% 90px;}
-.mark.big{height:14px;background:#aaa;}
-.number{position:absolute;font-weight:bold;font-size:14px;text-shadow:0 0 6px #0ff;}
-.n12{top:5px;left:50%;transform:translateX(-50%);color:#ff5252;}
-.n3{right:5px;top:50%;transform:translateY(-50%);color:#40c4ff;}
-.n6{bottom:5px;left:50%;transform:translateX(-50%);color:#69f0ae;}
-.n9{left:5px;top:50%;transform:translateY(-50%);color:#ffd740;}
+.hand{
+  position:absolute;
+  left:50%;
+  bottom:50%;
+  transform-origin:50% 100%;
+}
+.hour{width:5px;height:60px;background:#ccc}
+.minute{width:3px;height:85px;background:#eee}
+.second{width:2px;height:105px;background:#8a2be2}
 
-/* HANDS */
-.hand{position:absolute;left:50%;bottom:50%;transform-origin:50% 100%;border-radius:4px;}
-.hour{width:5px;height:50px;background:red;}
-.minute{width:3px;height:70px;background:blue;}
-.second{width:2px;height:85px;background:green;}
+.center{
+  width:8px;height:8px;
+  background:#8a2be2;
+  border-radius:50%;
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+}
 
-/* CENTER DOT */
-.center{width:8px;height:8px;background:white;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.time{font-size:24px;margin-top:10px}
+.ampm{font-size:12px;opacity:.6}
 
-/* TIME & DATE DISPLAY */
-.time-display{margin-top:220px;font-size:22px;font-weight:bold;}
-.date-display{font-size:14px;opacity:.8;margin-bottom:10px;}
-.separator{width:100%;height:1px;background:#444;margin:10px 0;}
+.controls{
+  margin-top:12px;
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.controls button{
+  padding:6px 10px;
+  background:#111;
+  color:#eee;
+  border:1px solid #333;
+  border-radius:6px;
+  font-size:12px;
+}
 
-/* PANELS */
-.panel{width:100%;display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
-.panel input,.panel select,.panel button{padding:8px;background:#111;color:#fff;border:1px solid #333;border-radius:6px;font-size:14px;}
-button:hover{cursor:pointer;background:#222;}
+.alarm{margin-top:10px}
+.alarm input{
+  background:#111;
+  color:#eee;
+  border:1px solid #333;
+  padding:6px;
+  border-radius:6px;
+}
 
+.bg{margin-top:10px}
+.bg button{font-size:11px}
 </style>
 </head>
+
 <body>
+<div class="wrapper">
 
-<div class="container">
+  <div class="brand">DEON MISHRA CLOCK</div>
 
-<div class="header">MADE BY ABHI</div>
-
-<div class="clock-ring">
-  <div class="ring1"></div>
-  <div class="ring2"></div>
-  <div class="ring3"></div>
-  
-  <div class="clock-body">
+  <div class="clock">
     <div class="hand hour"></div>
     <div class="hand minute"></div>
     <div class="hand second"></div>
     <div class="center"></div>
-    
+
     <div class="mark big" style="transform:rotate(0deg)"></div>
     <div class="mark" style="transform:rotate(30deg)"></div>
     <div class="mark" style="transform:rotate(60deg)"></div>
-    <div class="mark big" style="transform:rotate(90deg)"></div>
+    <div class="mark" style="transform:rotate(90deg)"></div>
     <div class="mark" style="transform:rotate(120deg)"></div>
     <div class="mark" style="transform:rotate(150deg)"></div>
-    <div class="mark big" style="transform:rotate(180deg)"></div>
+    <div class="mark" style="transform:rotate(180deg)"></div>
     <div class="mark" style="transform:rotate(210deg)"></div>
     <div class="mark" style="transform:rotate(240deg)"></div>
-    <div class="mark big" style="transform:rotate(270deg)"></div>
+    <div class="mark" style="transform:rotate(270deg)"></div>
     <div class="mark" style="transform:rotate(300deg)"></div>
     <div class="mark" style="transform:rotate(330deg)"></div>
-
-    <div class="number n12">12</div>
-    <div class="number n3">3</div>
-    <div class="number n6">6</div>
-    <div class="number n9">9</div>
   </div>
-</div>
 
-<div class="time-display" id="timeText">00:00:00</div>
-<div class="date-display" id="dateText">Wednesday 17/12/2025</div>
+  <div class="time">00 : 00</div>
+  <div class="ampm">AM</div>
 
-<div class="separator">_______________</div>
+  <div class="controls">
+    <button onclick="addHour()">Hour +</button>
+    <button onclick="addMin()">Min +</button>
+    <button onclick="toggleAMPM()">AM / PM</button>
+  </div>
 
-<div class="panel">
-  <input type="time" id="alarmTime">
-  <select id="alarmDay">
-    <option value="all">All Days</option>
-    <option value="0">Sunday</option>
-    <option value="1">Monday</option>
-    <option value="2">Tuesday</option>
-    <option value="3">Wednesday</option>
-    <option value="4">Thursday</option>
-    <option value="5">Friday</option>
-    <option value="6">Saturday</option>
-  </select>
-  <button onclick="setAlarm()">Set Alarm</button>
-  <button onclick="stopAlarm()">Stop Alarm</button>
-  <button onclick="clearAlarm()">Clear Alarm</button>
-</div>
+  <div class="alarm">
+    <input type="time" id="alarmTime">
+    <button onclick="setAlarm()">Set Alarm</button>
+  </div>
 
-<div class="separator">_______________</div>
+  <div class="bg">
+    <button onclick="bg('#0a0a0a')">Dark</button>
+    <button onclick="bg('linear-gradient(45deg,#8a2be2,#000)')">Purple</button>
+    <button onclick="bg('linear-gradient(45deg,#ff512f,#000)')">Red</button>
+  </div>
 
-<div class="panel">
-  <input type="time" id="setTime">
-  <button onclick="applyTime()">Apply Time</button>
-  <button onclick="resetReal()">Real Time Tracking</button>
 </div>
 
 <audio id="alarmSound" src="alarm.mp3"></audio>
 
 <script>
-let baseTime=null;
-let alarms=[];
+let customTime = null;
+let alarm = null;
 
 function updateClock(){
-  const now=baseTime?new Date(baseTime):new Date();
-  const h=now.getHours(),m=now.getMinutes(),s=now.getSeconds();
-  document.getElementById("timeText").innerHTML=
-    String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
-  const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  document.getElementById("dateText").innerHTML=days[now.getDay()]+" "+String(now.getDate()).padStart(2,"0")+"/"+String(now.getMonth()+1).padStart(2,"0")+"/"+now.getFullYear();
+  const now = customTime || new Date();
 
-  document.querySelector(".hour").style.transform=
-    `translateX(-50%) rotate(${(h%12)*30+m/2}deg)`;
-  document.querySelector(".minute").style.transform=
+  let h = now.getHours();
+  let m = now.getMinutes();
+  let s = now.getSeconds();
+
+  let ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+
+  document.querySelector(".time").innerHTML =
+    String(h).padStart(2,"0")+" : "+String(m).padStart(2,"0");
+  document.querySelector(".ampm").innerHTML = ampm;
+
+  document.querySelector(".hour").style.transform =
+    `translateX(-50%) rotate(${h*30 + m/2}deg)`;
+  document.querySelector(".minute").style.transform =
     `translateX(-50%) rotate(${m*6}deg)`;
-  document.querySelector(".second").style.transform=
+  document.querySelector(".second").style.transform =
     `translateX(-50%) rotate(${s*6}deg)`;
 
-  alarms.forEach(a=>{
-    if((a.day==='all'||a.day==now.getDay()) &&
-      a.time===String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")){
-      document.getElementById("alarmSound").play();
-    }
-  });
+  const cur = String(now.getHours()).padStart(2,"0")+":"+String(m).padStart(2,"0");
+  if(alarm && cur === alarm){
+    document.getElementById("alarmSound").play();
+  }
 
-  if(baseTime) baseTime.setSeconds(baseTime.getSeconds()+1);
+  if(customTime) customTime.setSeconds(customTime.getSeconds()+1);
 }
 
-function applyTime(){
-  const t=document.getElementById("setTime").value;
-  if(!t)return;
-  const n=new Date();const[x,y]=t.split(":");
-  baseTime=new Date(n.getFullYear(),n.getMonth(),n.getDate(),x,y,0);
-}
-function resetReal(){baseTime=null;}
-function setAlarm(){
-  alarms.push({
-    time:document.getElementById("alarmTime").value,
-    day:document.getElementById("alarmDay").value
-  });
-}
-function stopAlarm(){
-  const a=document.getElementById("alarmSound");
-  a.pause();a.currentTime=0;
-}
-function clearAlarm(){alarms=[];stopAlarm();}
+function addHour(){if(!customTime) customTime=new Date(); customTime.setHours(customTime.getHours()+1)}
+function addMin(){if(!customTime) customTime=new Date(); customTime.setMinutes(customTime.getMinutes()+1)}
+function toggleAMPM(){if(!customTime) customTime=new Date(); customTime.setHours(customTime.getHours()+12)}
+function setAlarm(){alarm=document.getElementById("alarmTime").value}
+function bg(v){document.body.style.background=v}
 
 setInterval(updateClock,1000);
 updateClock();
